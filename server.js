@@ -9,6 +9,30 @@ const db = new loki('loki.json');
 const puppies = db.addCollection('puppies');
 const app = express();
 
+const initData = [
+    {
+        name: 'Pupperito',
+        breed: 'Cotton Terrier',
+        age: 0.4,
+        uuid: uuidv1()
+    },
+    {
+        name: 'Tibby',
+        breed: 'Corgo',
+        age: 3,
+        uuid: uuidv1()
+    }
+    ,
+    {
+        name: 'Balou',
+        breed: 'Golden Brinback',
+        age: 10,
+        uuid: uuidv1()
+    }
+];
+
+puppies.insert(initData);
+
 app.use(bodyParser.json());
 app.get('/', (req, res) => {
     res.send("Thanks");

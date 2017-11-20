@@ -1,0 +1,24 @@
+version: '3.2'
+
+services:
+  mendixapp:
+      depends_on:
+       - db
+      image: jimleitch/puppersmendix:latest
+      environment:
+          ADMIN_PASSWORD: "Password1!"
+          DATABASE_ENDPOINT: "postgres://mendix:mendix@db:5432/mendix"
+          MX_Webservice_WS_URL: http://rest:3005
+      ports:
+          - 8080:80
+          - 8090:81
+      links:
+          - db
+          - rest
+
+  db:
+      image: postgres
+      environment:
+          POSTGRES_USER: mendix
+          POSTGRES_PASSWORD: mendix
+
